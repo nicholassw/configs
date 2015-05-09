@@ -1,0 +1,24 @@
+[global_config]
+  custom_url_handler = firefox
+[keybindings]
+[profiles]
+  [[default]]
+    background_image = None
+    background_darkness = 0.72
+    scrollback_lines = 2000
+    background_type = transparent
+    scrollbar_position = hidden
+    icon_bell = False
+    show_titlebar = False
+    cursor_shape = underline
+    cursor_blink = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

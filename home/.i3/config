@@ -1,0 +1,243 @@
+## TODO: add layout (stacking,tabbed,toggle split) keybinds
+
+
+#################################
+#				#
+#	WORKSPACE LAYOUT	#
+#				#
+#################################
+
+## Mod key
+set $mod Mod4
+
+## Font can be either X core font description
+## or pango
+font pango:DejaVu Sans Mono 8
+
+## Border style for new windows
+## can be normal, 1pixel, none, pixel n
+new_window 1pixel
+new_float 1pixel
+
+## Hide edge borders
+## can be none, vertical, horizontal, both
+hide_edge_borders none
+
+## Workspace definitions
+set $ws1 1:1
+set $ws2 2:2
+set $ws3 3:3
+set $ws4 4:4
+set $ws5 5:5
+set $ws6 6:6
+set $ws7 7:7
+set $ws8 8:8
+set $ws9 9:irc
+set $ws10 10:music
+
+## Resize mode
+mode "resize" {
+	bindsym j resize shrink width 10 px or 10 ppt
+	bindsym k resize grow height 10 px or 10 ppt
+	bindsym l resize shrink height 10 px or 10 ppt
+	bindsym semicolon resize grow width 10 px or 10 ppt
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym q mode "default"
+}
+
+## Handling popups during fullscreen
+## can be smart, ignore, leave_fullscreen
+popup_during_fullscreen smart
+
+## Selecting same workspace will switch between current
+## and previous workspace
+workspace_auto_back_and_forth yes
+
+## Constrain floating window size
+floating_minimum_size 75 x 50
+
+#################################
+#				#
+#     	   KEYBINDS		#
+#				#
+#################################
+
+## Reload config
+bindsym $mod+Shift+c reload
+
+## Restart inplace
+bindsym $mod+Shift+r restart
+
+## Exit
+bindsym $mod+Shift+e exit
+## Hold mod key to move/resize floating windows
+floating_modifier $mod
+
+## Resize
+bindsym $mod+r mode "resize"
+
+## Change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+## Move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+## Split horizontal/vertical
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+## Fullscreen mode for focused container
+bindsym $mod+f fullscreen
+
+## Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+## Change focus between tiling / floating
+bindsym $mod+space focus mode_toggle
+
+## Focus parent / child
+bindsym $mod+a focus parent
+bindsym $mod+d focus child
+
+## Toggle border between none, 1px, and default
+bindsym $mod+b border toggle
+
+## Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+## Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+## Terminal
+#bindsym $mod+Return exec --no-startup-id terminator
+bindsym $mod+Return exec i3-sensible-terminal
+
+## dmenu
+#bindsym $mod+p exec dmenu_run
+bindsym $mod+p exec "i3-dmenu-desktop --dmenu='dmenu -i -p $(pwd)\\ $ -b' --entry-type=name"
+
+## Kill focused window
+bindsym $mod+q kill
+
+## Move focused container to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+## Show scratchpad
+bindsym $mod+minus scratchpad show
+
+## Hardware volume keys
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5-
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5+
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+## Screenshot
+bindsym Print exec "scrot '%Y-%m-%d-%H-%M.png' -e 'mv $f ~/images/screenshots/'"
+
+#################################
+#				#
+#	     COLORS		#
+#				#
+#################################
+
+## syntax: colorclass border background text indicator
+## colorclass: client.focused, client.focused_inactive
+##		client.unfocused, client.urgent,
+##		client.placeholder
+## border: two bars above and below title bar
+## background: "border" color (only visible with >=1px border
+## text: titlebar text
+## indicator: h/v-split indicator bar
+## color is in html text format (#rrggbb)
+
+## class			border	backgr.	text	indicator
+client.focused			#4c7899	#009900 #ffffff	#2e9ef4
+#client.focused			#4c7899	#285577	#ffffff	#2e9ef4
+client.focused_inactive		#333333	#5f676a	#ffffff	#484e50
+client.unfocused		#333333	#222222	#888888	#292d2e
+client.urgent			#2f343a	#900000	#ffffff	#900000
+## client.placeholder		#000000	#0c0c0c	#ffffff	#000000
+
+
+
+#################################
+#				#
+#      	    AUTO-START		#
+#				#
+#################################
+
+# Set background
+#exec --no-startup-id "feh --bg-fill --no-fehbg ~/wallpaper"
+exec --no-startup-id "feh --bg-fill --no-fehbg -z ~/.wallpapers/*"
+
+## Initial workspace & app setup
+#exec --no-startup-id i3-msg 'workspace $ws2; exec iceweasel; workspace $ws10; exec deluge-gtk; workspace $ws1' 
+#exec --no-startup-id i3-msg 'workspace $ws10; exec deluge-gtk; workspace $ws1'
+
+#################################
+#				#
+#	       BAR		#
+#				#
+#################################
+
+bar {
+	font pango:DejaVu Sans Mono 8
+	mode dock
+	position bottom
+	workspace_buttons yes
+	strip_workspace_numbers yes
+	status_command i3status -c ~/.i3/i3status.conf
+
+## Colors
+## background, statusline, separator,
+## focused_workspace, active_workspace, inactive_workspace, urgent_workspace
+## for workspaces: border color, background color, text color
+	colors {
+		background	#000000
+		statusline	#ffffff
+		separator	#666666
+
+		#colorclass		border	backgr.	text
+		focused_workspace	#eaeaea	#009900	#eaeaea
+		focused_workspace	#4c7899	#285577	#ffffff		
+		active_workspace	#333333	#5f676a	#ffffff
+		inactive_workspace	#333333	#222222	#888888
+		urgent_workspace	#2f343a	#900000	#ffffff
+	}
+}
